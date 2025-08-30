@@ -1,4 +1,5 @@
 import unittest
+import pandas as pd
 from demographic_data_analyzer import *
 
 class TestDemographicDataAnalyzer(unittest.TestCase):
@@ -47,7 +48,6 @@ class TestDemographicDataAnalyzer(unittest.TestCase):
     def test_top_IN_occupation(self):
         self.assertIsInstance(top_IN_occupation, str)
         self.assertTrue(len(top_IN_occupation) > 0)
-
 
 if __name__ == '__main__':
     unittest.main()
