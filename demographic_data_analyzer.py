@@ -1,11 +1,12 @@
 import pandas as pd
 
-# Load the dataset
-df = pd.read_csv('adult.data.csv', header=None, names=[
+# Load the dataset directly from the UCI repository
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data"
+df = pd.read_csv(url, header=None, names=[
     'age', 'workclass', 'fnlwgt', 'education', 'education-num',
     'marital-status', 'occupation', 'relationship', 'race', 'sex',
     'capital-gain', 'capital-loss', 'hours-per-week', 'native-country', 'salary'
-])
+], na_values=" ?", skipinitialspace=True)
 
 # 1. Count of people by race
 race_count = df['race'].value_counts()
@@ -34,7 +35,7 @@ rich_percentage = round((num_min_workers['salary'] == '>50K').mean() * 100, 1)
 # 8. Country with highest % earning >50K
 country_counts = df.groupby('native-country')
 rich_country_percentage = (country_counts['salary']
-                           .apply(lambda x: (x=='>50K').mean() * 100))
+                           .apply(lambda x: (x == '>50K').mean() * 100))
 highest_earning_country = rich_country_percentage.idxmax()
 highest_earning_country_percentage = round(rich_country_percentage.max(), 1)
 
